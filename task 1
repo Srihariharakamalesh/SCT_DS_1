@@ -1,0 +1,21 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+dataset=pd.read_csv('user_behavior_dataset.csv')
+dataset.head()
+
+dataset.describe()
+
+sns.set_style('darkgrid')
+sns.countplot(x='Device Model',data=dataset)
+app_usage = dataset.groupby('Device Model')['App Usage Time (min/day)'].mean().sort_values()
+
+plt.figure(figsize=(10, 6))
+app_usage.plot(kind='bar', color='skyblue')
+plt.title('App usage time per Device Model ', fontsize=14,color='red')
+plt.xlabel('Device Model', fontsize=12)
+plt.ylabel('usage time per day', fontsize=12)
+plt.xticks( ha='right')
+plt.tight_layout()
+plt.show()
